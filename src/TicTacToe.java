@@ -1,5 +1,7 @@
 import java.awt.*;
+import java.awt.event.*;
 import javax.swing.*;
+
 public class TicTacToe {
     int width=700;
     int height=750;
@@ -10,9 +12,9 @@ public class TicTacToe {
     JPanel boardpanel = new JPanel();
 
     JButton[][] board= new JButton[3][3];
-    String X ="x";
-    String O ="o";
-    String currentPlayer=X;
+    String pX ="x";
+    String pO ="o";
+    String currentPlayer= pX;
 
 
 
@@ -49,8 +51,32 @@ public class TicTacToe {
                 boardpanel.add(tile);
 
                  tile.setForeground(Color.LIGHT_GRAY);
-                    tile.setBackground(Color.DARK_GRAY);
-              
+                 tile.setBackground(Color.DARK_GRAY);
+                 tile.setFont(new Font("calibre",Font.BOLD, 120));
+                 tile.setFocusable(false);
+                 
+                 tile.addActionListener(new ActionListener() {
+                   public void actionPerformed(ActionEvent e)
+                   {
+                    JButton tile = (JButton)e.getSource();
+                   
+
+                     if (tile.getText()=="")
+                        {
+                         if(currentPlayer==pX)
+                         {
+                            currentPlayer=pO;
+                         }
+                         else{
+                            currentPlayer=pX;
+                         }
+                         tile.setText(currentPlayer);
+                         textlable.setText(currentPlayer + "'s turn");
+                       }
+
+                   }
+                 })
+                ;
             }
         }
     }  
