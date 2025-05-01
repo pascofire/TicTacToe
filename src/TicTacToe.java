@@ -1,4 +1,3 @@
-import java.awt.event.*;
 import java.awt.*;
 import javax.swing.*;
 public class TicTacToe {
@@ -9,6 +8,13 @@ public class TicTacToe {
     JLabel textlable=new JLabel();
     JPanel textpanel = new JPanel();
     JPanel boardpanel = new JPanel();
+
+    JButton[][] board= new JButton[3][3];
+    String X ="x";
+    String O ="o";
+    String currentPlayer=X;
+
+
 
 
     TicTacToe()
@@ -34,5 +40,19 @@ public class TicTacToe {
         boardpanel.setBackground(Color.darkGray);
         frame.add(boardpanel);
 
+        for(int r=0;r<3;r++)
+        {
+            for(int c=0;c<3;c++)
+            {
+                JButton tile = new JButton();
+                board[r][c]= tile;
+                boardpanel.add(tile);
+
+                 tile.setForeground(Color.LIGHT_GRAY);
+                    tile.setBackground(Color.DARK_GRAY);
+              
+            }
+        }
     }  
+   
 }
