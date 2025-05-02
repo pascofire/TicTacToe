@@ -16,8 +16,7 @@ public class TicTacToe {
     String pO ="o";
     String currentPlayer= pX;
 
-
-
+    boolean gameOver = false;
 
     TicTacToe()
     {frame.setVisible(true);
@@ -57,21 +56,19 @@ public class TicTacToe {
                  
                  tile.addActionListener(new ActionListener() {
                    public void actionPerformed(ActionEvent e)
-                   {
+                   { if(gameOver) return;
                     JButton tile = (JButton)e.getSource();
                    
 
                      if (tile.getText()=="")
                         {
-                         if(currentPlayer==pX)
+                         currentPlayer=currentPlayer==pX?pO:pX;
+                         checkWinner();
+                         if(!gameOver)
                          {
-                            currentPlayer=pO;
-                         }
-                         else{
-                            currentPlayer=pX;
-                         }
-                         tile.setText(currentPlayer);
-                         textlable.setText(currentPlayer + "'s turn");
+                            tile.setText(currentPlayer);
+                            textlable.setText(currentPlayer + "'s turn");
+                        }
                        }
 
                    }
@@ -80,5 +77,33 @@ public class TicTacToe {
             }
         }
     }  
-   
+ void checkWinner()
+ {
+    //horizontal
+    for(int a=0;a<3;a++)
+    {   if(board[a][1].getText() =="")continue;
+        if(board[a][0].getText() == board[a][1].getText() && board[a][1].getText() == board[a][2].getText())
+        {
+            gameOver=true;
+            return;
+        }
+    }
+ 
+    //vertical
+    for(int c=0;c<3;c++)
+    {   if(board[1][c].getText() =="")continue;
+        if(board[0][c].getText() == board[1][c].getText() && board[1][c].getText() == board[2][c].getText())
+        {
+            gameOver=true;
+            return;
+        }
+    }
+
+    //diagonal
+    if(board[0][0].getText()==board[1][1].getText() && board[1][1].getText()==board[2][2].getText() 
+    && board[0][0].getText()!="")
+    {
+
+    }
+ }  
 }
