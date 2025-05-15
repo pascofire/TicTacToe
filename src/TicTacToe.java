@@ -61,12 +61,11 @@ public class TicTacToe {
                    
 
                      if (tile.getText()=="")
-                        {
-                         currentPlayer=currentPlayer==pX?pO:pX;
+                        {tile.setText(currentPlayer);
                          checkWinner();
                          if(!gameOver)
-                         {
-                            tile.setText(currentPlayer);
+                         {  
+                            currentPlayer=currentPlayer==pX?pO:pX;
                             textlable.setText(currentPlayer + "'s turn");
                         }
                        }
@@ -83,7 +82,9 @@ public class TicTacToe {
     for(int a=0;a<3;a++)
     {   if(board[a][1].getText() =="")continue;
         if(board[a][0].getText() == board[a][1].getText() && board[a][1].getText() == board[a][2].getText())
-        {
+        {  
+            for(int i=0;i<3;i++)
+            {setWinner(board[a][i]);}
             gameOver=true;
             return;
         }
@@ -102,8 +103,23 @@ public class TicTacToe {
     //diagonal
     if(board[0][0].getText()==board[1][1].getText() && board[1][1].getText()==board[2][2].getText() 
     && board[0][0].getText()!="")
-    {
-
+    { gameOver=true;
+    
+        return;
     }
+
+     if(board[0][2].getText()==board[1][1].getText() && board[1][1].getText()==board[2][0].getText() 
+     && board[0][2].getText()!="")
+     { gameOver=true;
+         return;
+ 
+     }
  }  
+
+ void setWinner(JButton tile)
+ {
+    tile.setForeground(Color.green);
+    tile.setBackground(Color.gray);
+    textlable.setText(currentPlayer+"is the winner!");
+ }
 }
