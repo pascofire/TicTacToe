@@ -15,8 +15,12 @@ public class TicTacToe {
     String pX ="x";
     String pO ="o";
     String currentPlayer= pX;
-
+    int turns=0;
     boolean gameOver = false;
+
+//    TicTacToe(EasyBot Bot){
+//
+//    }
 
     TicTacToe()
     {frame.setVisible(true);
@@ -62,20 +66,23 @@ public class TicTacToe {
 
                      if (tile.getText()=="")
                         {tile.setText(currentPlayer);
-                         checkWinner();
+                            turns++;
+
                          if(!gameOver)
-                         {  
-                            currentPlayer=currentPlayer==pX?pO:pX;
+                         {  if(currentPlayer.equals(pX))
+                           {
+                              EasyBot bot = new EasyBot(board);
+                           }
                             textlable.setText(currentPlayer + "'s turn");
                         }
+                            checkWinner();
                        }
 
                    }
-                 })
-                ;
+                 });//action listener
             }
         }
-    }  
+    } // end of default constuctor
  void checkWinner()
  {
     //horizontal
@@ -94,7 +101,8 @@ public class TicTacToe {
     for(int c=0;c<3;c++)
     {   if(board[1][c].getText() =="")continue;
         if(board[0][c].getText() == board[1][c].getText() && board[1][c].getText() == board[2][c].getText())
-        {
+        { for(int i=0;i<3;i++)
+            {setWinner(board[i][c]);}
             gameOver=true;
             return;
         }
@@ -104,15 +112,32 @@ public class TicTacToe {
     if(board[0][0].getText()==board[1][1].getText() && board[1][1].getText()==board[2][2].getText() 
     && board[0][0].getText()!="")
     { gameOver=true;
-    
+        for(int i=0;i<3;i++)
+        {setWinner(board[i][i]);}
         return;
     }
 
      if(board[0][2].getText()==board[1][1].getText() && board[1][1].getText()==board[2][0].getText() 
      && board[0][2].getText()!="")
      { gameOver=true;
+        setWinner(board[0][2]);
+        setWinner(board[1][1]);
+        setWinner(board[2][0]);
          return;
  
+     }
+     if(turns==9)
+     {for(int r=0;r<3;r++)
+        {for(int c=0;c<3;c++)
+            {
+               board[r][c].setForeground(Color.blue);
+               board[r][c].setBackground(Color.gray);
+               
+            }
+        }
+        textlable.setText("it's a tie!");
+        gameOver=true;
+        return;
      }
  }  
 
@@ -120,6 +145,6 @@ public class TicTacToe {
  {
     tile.setForeground(Color.green);
     tile.setBackground(Color.gray);
-    textlable.setText(currentPlayer+"is the winner!");
+    textlable.setText(tile.getText() +" is the winner!");
  }
 }
