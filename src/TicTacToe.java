@@ -66,16 +66,15 @@ public class TicTacToe {
 
                      if (tile.getText()=="")
                         {tile.setText(currentPlayer);
-                            turns++;
-
+                            turns=turns+2;
+                            checkWinner();
                          if(!gameOver)
                          {  if(currentPlayer.equals(pX))
                            {
                               EasyBot bot = new EasyBot(board);
                            }
                             textlable.setText(currentPlayer + "'s turn");
-                        }
-                            checkWinner();
+                        }checkWinner();
                        }
 
                    }
