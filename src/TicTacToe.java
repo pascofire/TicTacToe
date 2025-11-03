@@ -71,7 +71,7 @@ public class TicTacToe {
                          if(!gameOver)
                          {  if(currentPlayer.equals(pX))
                            {
-                              EasyBot bot = new EasyBot(board);
+                              HardBot bot = new HardBot(board);
                            }
                             textlable.setText(currentPlayer + "'s turn");
                         }checkWinner();
