@@ -5,6 +5,7 @@ import javax.swing.*;
 public class TicTacToe {
     int width=700;
     int height=750;
+    String selectedDifficulty ="";
 
     JFrame frame=new JFrame("TicTacToe");
     JLabel textlable=new JLabel();
@@ -18,12 +19,11 @@ public class TicTacToe {
     int turns=0;
     boolean gameOver = false;
 
-//    TicTacToe(EasyBot Bot){
-//
-//    }
 
-    TicTacToe()
-    {frame.setVisible(true);
+
+    TicTacToe(String selectedDifficulty) {
+        this.selectedDifficulty = selectedDifficulty;
+        frame.setVisible(true);
         frame.setSize(width,height);
         frame.setLocationRelativeTo(null);
         frame.setResizable(false);
@@ -70,8 +70,10 @@ public class TicTacToe {
                             checkWinner();
                          if(!gameOver)
                          {  if(currentPlayer.equals(pX))
-                           {
-                              HardBot bot = new HardBot(board);
+                           {  if(selectedDifficulty.equals("easy"))
+                                 {EasyBot bot = new EasyBot(board);}
+                              else if(selectedDifficulty.equals("hard"))
+                                 { HardBot bot = new HardBot(board);}
                            }
                             textlable.setText(currentPlayer + "'s turn");
                         }checkWinner();
