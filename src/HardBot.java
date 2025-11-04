@@ -12,12 +12,6 @@ public class HardBot {
         }
     }
 
-    // helper class for move
-    private static class Move {
-        int row, col;
-        Move(int r, int c) { row = r; col = c; }
-    }
-
     private Move findBestMove() {
         int bestVal = Integer.MIN_VALUE;
         Move bestMove = null;
@@ -27,7 +21,7 @@ public class HardBot {
                 if (isEmptyCell(r, c)) {
                     // Make the move
                     board[r][c].setText("O");
-                    int moveVal = minimax(0, false);
+                    int moveVal = Backtracking(0, false);
                     // Undo
                     board[r][c].setText("");
                     if (moveVal > bestVal) {
@@ -41,10 +35,10 @@ public class HardBot {
     }
 
 
-    private int minimax(int depth, boolean isMax) {
+    private int Backtracking(int depth, boolean isMax) {
         Integer score = evaluateBoard();
         if (score != null) { // non-null means terminal (win or loss)
-            return score > 0 ? score - depth : score + depth;// if bot wins, positive ; if human wins, negative.
+            return (score > 0) ? (score - depth) : (score + depth);// if bot wins, positive ; if human wins, negative.
         }
 
         if (isBoardFull()) {
@@ -57,7 +51,7 @@ public class HardBot {
                 for (int c = 0; c < 3; c++) {
                     if (isEmptyCell(r, c)) {
                         board[r][c].setText("O");
-                        best = Math.max(best, minimax(depth + 1, false));
+                        best = Math.max(best, Backtracking(depth + 1, false));
                         board[r][c].setText("");
                     }
                 }
@@ -70,7 +64,7 @@ public class HardBot {
                     if (isEmptyCell(r, c)) {
                         // assume human plays "x"
                         board[r][c].setText("x");
-                        best = Math.min(best, minimax(depth + 1, true));
+                        best = Math.min(best, Backtracking(depth + 1, true));
                         board[r][c].setText("");
                     }
                 }
