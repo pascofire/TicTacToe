@@ -81,8 +81,8 @@ public class HardBot {
             String b = board[r][1].getText();
             String c = board[r][2].getText();
             if (!a.equals("") && a.equalsIgnoreCase(b) && b.equalsIgnoreCase(c)) {
-                if (a.equalsIgnoreCase("O")) return +1;
-                if (a.equalsIgnoreCase("x")) return -1;
+                if (a.equalsIgnoreCase("O")) return +10;
+                if (a.equalsIgnoreCase("x")) return -10;
             }
         }
         // columns
@@ -91,8 +91,8 @@ public class HardBot {
             String b = board[1][col].getText();
             String c = board[2][col].getText();
             if (!a.equals("") && a.equalsIgnoreCase(b) && b.equalsIgnoreCase(c)) {
-                if (a.equalsIgnoreCase("O")) return +1;
-                if (a.equalsIgnoreCase("x")) return -1;
+                if (a.equalsIgnoreCase("O")) return +10;
+                if (a.equalsIgnoreCase("x")) return -10;
             }
         }
         // diagonals
@@ -100,15 +100,15 @@ public class HardBot {
         String d1b = board[1][1].getText();
         String d1c = board[2][2].getText();
         if (!d1a.equals("") && d1a.equalsIgnoreCase(d1b) && d1b.equalsIgnoreCase(d1c)) {
-            if (d1a.equalsIgnoreCase("O")) return +1;
-            if (d1a.equalsIgnoreCase("x")) return -1;
+            if (d1a.equalsIgnoreCase("O")) return +10;
+            if (d1a.equalsIgnoreCase("x")) return -10;
         }
         String d2a = board[0][2].getText();//d2a = right to left diagonal
         String d2b = board[1][1].getText();
         String d2c = board[2][0].getText();
         if (!d2a.equals("") && d2a.equalsIgnoreCase(d2b) && d2b.equalsIgnoreCase(d2c)) {
-            if (d2a.equalsIgnoreCase("O")) return +1;
-            if (d2a.equalsIgnoreCase("x")) return -1;
+            if (d2a.equalsIgnoreCase("O")) return +10;
+            if (d2a.equalsIgnoreCase("x")) return -10;
         }
         return null; // no terminal winner yet
     }
